@@ -50,7 +50,7 @@ class Server:
             page_size (int): number of items per page
         Returns:
             A dictionary of the following:
-                * page_size, page, data, next_page, prev_page, total_pages
+                * page_size, page, data, next_page, prev_page, total_page
         """
         content_of_pages = self.get_page(page, page_size)
         Lines = len(self.dataset())
