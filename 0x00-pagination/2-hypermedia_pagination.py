@@ -41,7 +41,9 @@ class Server:
             return []
         return data[start:end]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, Union[int, List[List], None]]:
+    def get_hyper(
+        self, page: int = 1, page_size: int = 10
+    ) -> Dict[str, Union[int, List[List], None]]:
         """
         Args:
             page (int): page number
@@ -51,18 +53,15 @@ class Server:
                 * page_size, page, data, next_page, prev_page, total_pages
         """
         content_of_pages = self.get_page(page, page_size)
-        totalLines = len(self.dataset())
+        Lines = len(self.dataset())
         dictionary = {
             "page_size": page_size,
             "page": page,
             "data": content_of_pages,
             "next_page": (
-                None
-                if content_of_pages == [] or page >= totalLines
-                else page + 1
+                None if content_of_pages == [] or page >= Lines else page + 1
             ),
             "prev_page": None if page == 1 else page - 1,
-            "total_pages": math.ceil(totalLines/page_size)
-
+            "total_pages": math.ceil(Lines / page_size),
         }
         return dictionary
