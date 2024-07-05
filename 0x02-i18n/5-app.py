@@ -2,7 +2,9 @@
 """
 A Basic flask application
 """
-from typing import Dict, Union
+from typing import (
+    Dict, Union
+)
 
 from flask import Flask
 from flask import g, request
@@ -14,10 +16,9 @@ class Config(object):
     """
     Application configuration class
     """
-
-    LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE = "en"
-    BABEL_DEFAULT_TIMEZONE = "UTC"
+    LANGUAGES = ['en', 'fr']
+    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
 # Instantiate the application object
@@ -33,10 +34,10 @@ def get_locale() -> str:
     """
     Gets locale from request object
     """
-    locale = request.args.get("locale", "").strip()
+    locale = request.args.get('locale', '').strip()
     if locale and locale in Config.LANGUAGES:
         return locale
-    return request.accept_languages.best_match(app.config["LANGUAGES"])
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 users = {
@@ -63,16 +64,16 @@ def before_request():
     """
     Adds valid user to the global session object `g`
     """
-    setattr(g, "user", get_user(request.args.get("login_as", 0)))
+    setattr(g, 'user', get_user(request.args.get('login_as', 0)))
 
 
-@app.route("/", strict_slashes=False)
+@app.route('/', strict_slashes=False)
 def index() -> str:
     """
     Renders a basic html template
     """
-    return render_template("5-index.html")
+    return render_template('5-index.html')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run()
